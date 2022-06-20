@@ -1,0 +1,12 @@
+name: Hexlib
+version: '${project.version}'
+main: io.github.itstaylz.hexlib.HexlibPlugin
+api-version: 1.18
+authors: [ itsTaylz ]
+description: A library to help in the development of spigot plugins
+
+commands:
+
+  hexlibdebug:
+    aliases: [hldebug]
+    permission: hexlib.debug
