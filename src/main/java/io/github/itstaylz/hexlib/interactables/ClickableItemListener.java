@@ -11,17 +11,17 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public final class ClickableItemListener implements Listener {
 
-    private final NamespacedKey clickKey;
+    static NamespacedKey clickableItemKey;
 
     public ClickableItemListener(JavaPlugin plugin) {
-        this.clickKey = new NamespacedKey(plugin, "clickable_item");
+        clickableItemKey = new NamespacedKey(plugin, "clickable_item");
     }
 
     @EventHandler
     private void onClick(PlayerInteractEvent event) {
         ItemStack item = event.getItem();
         if (item != null) {
-            String keyString = ItemUtils.getPDCValue(item, this.clickKey, PersistentDataType.STRING);
+            String keyString = ItemUtils.getPDCValue(item, clickableItemKey, PersistentDataType.STRING);
             if (keyString != null) {
                 ClickableItem clickableItem = ClickableItemManager.getClickableItem(NamespacedKey.fromString(keyString));
                 clickableItem.handleClick(event);

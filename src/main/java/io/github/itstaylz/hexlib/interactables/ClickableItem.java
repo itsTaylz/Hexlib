@@ -1,13 +1,11 @@
 package io.github.itstaylz.hexlib.interactables;
 
-import io.github.itstaylz.hexlib.HexlibPlugin;
 import io.github.itstaylz.hexlib.utils.ItemUtils;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
-import org.bukkit.plugin.java.JavaPlugin;
 
 public class ClickableItem {
 
@@ -24,7 +22,7 @@ public class ClickableItem {
 
     public void giveItem(Player player) {
         ItemStack item = this.itemStack.clone();
-        ItemUtils.setPDCValue(item, new NamespacedKey(JavaPlugin.getPlugin(HexlibPlugin.class), "clickable_item"), PersistentDataType.STRING, this.key.toString());
+        ItemUtils.setPDCValue(item, ClickableItemListener.clickableItemKey, PersistentDataType.STRING, this.key.toString());
         player.getInventory().addItem(item);
     }
 
