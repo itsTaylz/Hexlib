@@ -5,14 +5,13 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
 
-public class MenuItem extends MenuComponent {
+public class MenuCollectableItem extends MenuComponent {
 
-    public MenuItem(ItemStack itemStack) {
+    public MenuCollectableItem(ItemStack itemStack) {
         super(itemStack);
     }
 
     @Override
     public void onClick(InventoryClickEvent event, Player player, Menu menu) {
-        event.setCancelled(true);
     }
 }

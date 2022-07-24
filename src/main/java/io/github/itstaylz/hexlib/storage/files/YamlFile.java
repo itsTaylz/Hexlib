@@ -1,9 +1,11 @@
 package io.github.itstaylz.hexlib.storage.files;
 
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Set;
 
 public class YamlFile extends FileBase {
 
@@ -51,6 +53,14 @@ public class YamlFile extends FileBase {
         if (contains(path))
             return (T) get(path);
         return defaultValue;
+    }
+
+    public ConfigurationSection getSection(String path) {
+        return config.getConfigurationSection(path);
+    }
+
+    public Set<String> getKeys(boolean deep) {
+        return config.getKeys(deep);
     }
 
     public YamlConfiguration getConfig() {

@@ -16,7 +16,7 @@ public class MenuButton extends MenuComponent {
     }
 
     @Override
-    public void handleClick(InventoryClickEvent event, Player player, Menu menu) {
+    public void onClick(InventoryClickEvent event, Player player, Menu menu) {
         event.setCancelled(true);
         this.clickHandler.onClick(event, player, menu);
     }

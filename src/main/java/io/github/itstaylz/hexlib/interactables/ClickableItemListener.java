@@ -7,24 +7,18 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
-import org.bukkit.plugin.java.JavaPlugin;
 
 public final class ClickableItemListener implements Listener {
-
-    static NamespacedKey clickableItemKey;
-
-    public ClickableItemListener(JavaPlugin plugin) {
-        clickableItemKey = new NamespacedKey(plugin, "clickable_item");
-    }
 
     @EventHandler
     private void onClick(PlayerInteractEvent event) {
         ItemStack item = event.getItem();
         if (item != null) {
-            String keyString = ItemUtils.getPDCValue(item, clickableItemKey, PersistentDataType.STRING);
+            String keyString = ItemUtils.getPDCValue(item, ClickableItem.CLICKABLE_ITEM_KEY, PersistentDataType.STRING);
             if (keyString != null) {
                 ClickableItem clickableItem = ClickableItemManager.getClickableItem(NamespacedKey.fromString(keyString));
-                clickableItem.handleClick(event);
+                if (clickableItem != null)
+                    clickableItem.handleClick(event);
             }
         }
     }

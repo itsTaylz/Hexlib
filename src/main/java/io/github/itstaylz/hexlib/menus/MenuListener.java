@@ -14,10 +14,10 @@ public class MenuListener implements Listener {
         if (event.getWhoClicked() instanceof Player player) {
             Inventory topInv = player.getOpenInventory().getTopInventory();
             if (event.getClickedInventory() != null && topInv.getHolder() instanceof Menu menu) {
-                if (topInv != event.getClickedInventory()) {
-                    event.setCancelled(true);
-                } else {
+                if (topInv == event.getClickedInventory()) {
                     menu.handleClick(event, player);
+                } else if (!menu.allowsOutsideClicks()) {
+                    event.setCancelled(true);
                 }
             }
         }

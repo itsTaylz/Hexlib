@@ -1,29 +1,33 @@
 package io.github.itstaylz.hexlib.interactables;
 
+import io.github.itstaylz.hexlib.HexlibPlugin;
 import io.github.itstaylz.hexlib.utils.ItemUtils;
 import org.bukkit.NamespacedKey;
-import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.persistence.PersistentDataType;
+import org.bukkit.plugin.java.JavaPlugin;
 
 public class ClickableItem {
+
+    private static final JavaPlugin PLUGIN;
+    static final NamespacedKey CLICKABLE_ITEM_KEY;
+
+    static {
+        PLUGIN = JavaPlugin.getPlugin(HexlibPlugin.class);
+        CLICKABLE_ITEM_KEY = new NamespacedKey(PLUGIN, "clickable_item");
+    }
 
     private final NamespacedKey key;
     private final ItemStack itemStack;
     private final ItemClickHandler handler;
 
-    public ClickableItem(NamespacedKey key, ItemStack itemStack, ItemClickHandler handler) {
-        this.key = key;
-        this.itemStack = itemStack;
+    public ClickableItem(String id, ItemStack itemStack, ItemClickHandler handler) {
+        this.key = new NamespacedKey(PLUGIN, id);
+        this.itemStack = itemStack.clone();
         this.handler = handler;
         ClickableItemManager.registerClickableItem(this);
-    }
-
-    public void giveItem(Player player) {
-        ItemStack item = this.itemStack.clone();
-        ItemUtils.setPDCValue(item, ClickableItemListener.clickableItemKey, PersistentDataType.STRING, this.key.toString());
-        player.getInventory().addItem(item);
+        ItemUtils.setPDCValue(this.itemStack, CLICKABLE_ITEM_KEY, PersistentDataType.STRING, this.key.toString());
     }
 
     public ItemStack getItemStack() {

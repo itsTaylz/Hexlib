@@ -17,5 +17,5 @@ public abstract class MenuComponent {
         return itemStack;
     }
 
-    public abstract void handleClick(InventoryClickEvent event, Player player, Menu menu);
+    public abstract void onClick(InventoryClickEvent event, Player player, Menu menu);
 }
